@@ -46,6 +46,7 @@ module.exports = router;
  *                 type: string
  *               author:
  *                 type: string
+ *                 description: Author ID (ObjectId)
  *               publisher:
  *                 type: string
  *               price:
@@ -62,7 +63,7 @@ module.exports = router;
  *                 description: Number of pages
  *             example:
  *               title: Harry Potter and the Philosopher's Stone
- *               author: "author id"
+ *               author: "603dcbba8f1b2b3a90e1e99b" # Example ObjectId for author
  *               publisher: "İş Bankası"
  *               price: 19.99
  *               ISBN: "978-0-7475-3269-9"
@@ -71,6 +72,10 @@ module.exports = router;
  *     responses:
  *       "201":
  *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Book'  # Example of the created book
  *   get:
  *     summary: Get all books
  *     tags: [Books]
@@ -84,7 +89,7 @@ module.exports = router;
  *         name: sortBy
  *         schema:
  *           type: string
- *         description: sort by query in the form of field:desc/asc (ex. title:asc)
+ *         description: Sort by query in the form of field:desc/asc (ex. title:asc)
  *       - in: query
  *         name: limit
  *         schema:
@@ -152,7 +157,7 @@ module.exports = router;
  *               type: object
  *               example:
  *                 title: Harry Potter and the Chamber of Secrets
- *                 author: "author id"
+ *                 author: "603dcbba8f1b2b3a90e1e99b" # Example ObjectId for author
  *                 publisher: "publisher id"
  *                 price: 21.99
  *                 ISBN: "978-0-7475-3849-3"
@@ -174,7 +179,7 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: book id
+ *         description: Book id
  *     requestBody:
  *       required: true
  *       content:
@@ -186,9 +191,21 @@ module.exports = router;
  *                 type: string
  *               price:
  *                 type: number
+ *               publisher:
+ *                 type: string
+ *               ISBN:
+ *                 type: string
+ *               language:
+ *                 type: string
+ *               numberOfPages:
+ *                 type: integer
  *             example:
  *               title: Harry Potter and the Prisoner of Azkaban
  *               price: 24.99
+ *               publisher: "Bloomsbury"
+ *               ISBN: "978-0-7475-4215-5"
+ *               language: English
+ *               numberOfPages: 317
  *     responses:
  *       "200":
  *         description: OK
@@ -197,8 +214,8 @@ module.exports = router;
  *             schema:
  *               example:
  *                 title: Harry Potter and the Prisoner of Azkaban
- *                 author: "author id"
- *                 publisher: "publisher id"
+ *                 author: "603dcbba8f1b2b3a90e1e99b" # Example ObjectId for author
+ *                 publisher: "Bloomsbury"
  *                 price: 24.99
  *                 ISBN: "978-0-7475-4215-5"
  *                 language: English
